@@ -1,16 +1,25 @@
+/////////////////////////////////// global consts and lets ////////////////////////////////////////
+
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const overlay = document.getElementById('overlay');
 const resetBtn = document.querySelector('.btn__reset');
 const scoreBoard = document.getElementById('scoreboard');
-let missed = 0;
 const phrases = [
   'Better safe than sorry',
   'A piece of cake',
   'I wish you all the best',
   'This is a random phrase',
   'Be strong and courageous'
-]
+];
+let missed = 0;
+
+/////////////////////////////////// end global consts and lets ////////////////////////////////////////
+
+
+
+
+/////////////////////////////////// functions ////////////////////////////////////////
 
 function getRandomPhraseArray(array) {
   const random = Math.floor((Math.random() * array.length));
@@ -19,15 +28,11 @@ function getRandomPhraseArray(array) {
 
 function addPhraseToDisplay() {
   const selectedPhrase = getRandomPhraseArray(phrases);
-
   for (let i = 0; i < selectedPhrase.length; i++) {
     const char = selectedPhrase[i];
     const li = document.createElement('li');
-    
     li.textContent = char;
-
     li.className = char !== " " ? 'letter' : 'space';
-
     phrase.querySelector('ul').appendChild(li);
   }
 }
@@ -48,7 +53,7 @@ function checkLetter(letter) {
 
 function checkWin() {
   let lettersLi = phrase.getElementsByClassName('letter');
-  let hitLettersLi = phrase.getElementsByClassName('show')
+  let hitLettersLi = phrase.getElementsByClassName('show');
   if (hitLettersLi.length === lettersLi.length) {
     overlay.className = 'win';
     overlay.firstElementChild.textContent = 'You Win!';
@@ -60,25 +65,26 @@ function checkWin() {
 function cleanGame() {
   const chosen = qwerty.getElementsByClassName('chosen');
   const hiddenTries = scoreBoard.getElementsByClassName('hide');
-
   while (chosen.length > 0) {
     chosen[0].disabled = false;
     chosen[0].className = '';
   }
-
   while (hiddenTries.length > 0) {
     hiddenTries[0].className = '';
   }
-
   phrase.firstElementChild.innerHTML = '';
-
   missed = 0;
 }
 
+/////////////////////////////////// end functions ////////////////////////////////////////
 
+
+
+
+/////////////////////////////////// events ////////////////////////////////////////
 
 qwerty.addEventListener('click', e => {
-  const target = e.target
+  const target = e.target;
   if (target.tagName === 'BUTTON') {
     target.className = 'chosen';
     target.disabled = true;
@@ -97,12 +103,13 @@ qwerty.addEventListener('click', e => {
     } else {
       checkWin();
     }
-
   }
 });
 
 resetBtn.addEventListener('click', () => {
-  cleanGame()
+  cleanGame();
   addPhraseToDisplay();
   overlay.style.display = 'none';
 });
+
+/////////////////////////////////// end events ////////////////////////////////////////

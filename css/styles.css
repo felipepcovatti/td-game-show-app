@@ -1,4 +1,5 @@
 /* Main styles */
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
 
 /* Variables */
@@ -81,9 +82,11 @@ button {
 /* Scoreboard */
 
 .tries {
-  background-image: url('../images/lostHeart.png');
+  background-image: url('../images/lostHeart.png'); /*changed liveHeart.png to lostHeart.png*/
+  /* added */
   background-repeat: no-repeat;
   background-size: 30px 35px;
+  /* end */
 }
 
 /* added */
