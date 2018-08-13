@@ -23,12 +23,11 @@ function addPhraseToDisplay() {
   for (let i = 0; i < selectedPhrase.length; i++) {
     const char = selectedPhrase[i];
     const li = document.createElement('li');
+    
     li.textContent = char;
-    if (char != " ") {
-      li.className = 'letter';
-    } else {
-      li.className = 'space';
-    }
+
+    li.className = char !== " " ? 'letter' : 'space';
+
     phrase.querySelector('ul').appendChild(li);
   }
 }
@@ -44,11 +43,7 @@ function checkLetter(letter) {
       hit = true;
     }
   }
-  if (hit) {
-    return letter;
-  } else {
-    return null
-  }
+  return hit ? letter : null;
 }
 
 function checkWin() {
@@ -82,7 +77,7 @@ function cleanGame() {
 
 
 
-qwerty.addEventListener('click', function(e) {
+qwerty.addEventListener('click', e => {
   const target = e.target
   if (target.tagName === 'BUTTON') {
     target.className = 'chosen';
@@ -106,7 +101,7 @@ qwerty.addEventListener('click', function(e) {
   }
 });
 
-resetBtn.addEventListener('click', function() {
+resetBtn.addEventListener('click', () => {
   cleanGame()
   addPhraseToDisplay();
   overlay.style.display = 'none';
